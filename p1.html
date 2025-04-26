@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 5px;
+        }
+
+        button {
+            width: 100px;
+            height: 100px;
+            font-size: 2rem;
+            border: 2px solid #333;
+            background-color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="board">
+        <button id="b1"></button>
+        <button id="b2"></button>
+        <button id="b3"></button>
+        <button id="b4"></button>
+        <button id="b5"></button>
+        <button id="b6"></button>
+        <button id="b7"></button>
+        <button id="b8"></button>
+        <button id="b9"></button>
+    </div>
+</body>
+<script>
+    b1 = document.querySelector("#b1")
+    b1.addEventListener("click",() =>{
+        b1.innerHTML = "O"
+    })
+</script>
+</html>

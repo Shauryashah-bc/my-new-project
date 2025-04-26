@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+<body>
+  <button id="clickme">Roll</button>
+  <span id="randomnumber"></span>
+
+  <script>
+    let randomnumber = document.querySelector("#randomnumber"); 
+    let dice = document.querySelector("#clickme");
+    let n = 0
+
+    dice.addEventListener("click", () => {
+      
+      const roll = Math.floor(Math.random() * 6) + 1;
+      randomnumber.innerHTML = eval(roll + n); 
+         n = Number(randomnumber.innerHTML)
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator (Ready for JS)</title>
+  <style>
+    body {
+      background: #e6e6e6;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .calculator {
+      background: #1c1c1c;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+      width: 320px;
+    }
+
+    #display {
+      background: #000;
+      color: #0f0;
+      font-size: 2em;
+      text-align: right;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      height: 60px;
+
+      overflow-x: auto;
+      white-space: nowrap;
+      word-break: keep-all;
+      direction: ltr;
+    }
+    #display {
+    /* existing styles... */
+    overflow-x: auto;
+    white-space: nowrap;
+    
+
+    /* hide scrollbar but keep scrolling */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+
+#display::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    button {
+      background: #333;
+      color: #fff;
+      font-size: 1.3em;
+      padding: 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    button:hover {
+      background: #555;
+    }
+
+    button:active {
+      background: #777;
+      transform: scale(0.95);
+    }
+
+    .operator {
+      background: #ff9500;
+    }
+
+    .operator:hover {
+      background: #e68a00;
+    }
+
+    .equal {
+      background: #34c759;
+    }
+
+    .equal:hover {
+      background: #2fa94f;
+    }
+
+    .zero {
+      grid-column: span 2;
+    }
+
+    .clear {
+      background: #ff3b30;
+    }
+
+    .clear:hover {
+      background: #e63328;
+    }
+  </style>
+</head>
+<body>
+
+<div class="calculator">
+  <div id="display">0</div>
+  <div class="buttons">
+    <button id="btn-clear" class="clear">C</button>
+    <button id="btn-7">7</button>
+    <button id="btn-8">8</button>
+    <button id="btn-9">9</button>
+    <button id="btn-divide" class="operator">÷</button>
+    <button id="btn-4">4</button>
+    <button id="btn-5">5</button>
+    <button id="btn-6">6</button>
+    <button id="btn-multiply" class="operator">×</button>
+    <button id="btn-1">1</button>
+    <button id="btn-2">2</button>
+    <button id="btn-3">3</button>
+    <button id="btn-subtract" class="operator">−</button>
+    <button id="btn-0" class="zero">0</button>
+    <button id="btn-dot">.</button>
+    <button id="btn-add" class="operator">+</button>
+    <button id="btn-equals" class="equal">=</button>
+  </div>
+</div>
+
+<script>
+    const display = document.querySelector('#display');
+    const btn0 = document.querySelector('#btn-0');
+    const btn1 = document.querySelector('#btn-1');
+    const btn2 = document.querySelector('#btn-2');
+    const btn3 = document.querySelector('#btn-3');
+    const btn4 = document.querySelector('#btn-4');
+    const btn5 = document.querySelector('#btn-5');
+    const btn6 = document.querySelector('#btn-6');
+    const btn7 = document.querySelector('#btn-7');
+    const btn8 = document.querySelector('#btn-8');
+    const btn9 = document.querySelector('#btn-9');
+    const btnDot = document.querySelector('#btn-dot');
+    const btnAdd = document.querySelector('#btn-add');
+    const btnSubtract = document.querySelector('#btn-subtract');
+    const btnMultiply = document.querySelector('#btn-multiply');
+    const btnDivide = document.querySelector('#btn-divide');
+    const btnEquals = document.querySelector('#btn-equals');
+    const btnClear = document.querySelector('#btn-clear');
+  
+    btnClear.addEventListener("click", () => {
+      display.innerHTML = "0";
+    });
+
+  
+    btn0.addEventListener("click", () => {
+  if (display.innerHTML === "0") display.innerHTML = "0";
+  else if (display.innerHTML === "eq") display.innerHTML = "0";
+  else display.innerHTML += "0";
+});
+
+btn1.addEventListener("click", () => {
+  if (display.innerHTML === "0") display.innerHTML = "1";
+  else if (display.innerHTML === "eq") display.innerHTML = "1";
+  else display.innerHTML += "1";
+});
+
+btn2.addEventListener("click", () => {
+  if (display.innerHTML === "0") display.innerHTML = "2";
+  else if (display.innerHTML === "eq") display.innerHTML = "2";
+  else display.innerHTML += "2";
+});
+
+btn3.addEventListener("click", () => {
+  if (display.innerHTML === "0") display.innerHTML = "3";
+  else if (display.innerHTML === "eq") display.innerHTML = "3";
+  else display.innerHTML += "3";
+});
+
+btn4.addEventListener("click", () => {
+  if (display.innerHTML === "0") display.innerHTML = "4";
+  else if (display.innerHTML === "eq") display.innerHTML = "4";
+  else display.innerHTML += "4";
+});
+
+btn5.addEventListener("click", () => {
+  if (display.innerHTML === "0") display.innerHTML = "5";
+  else if (display.innerHTML === "eq") display.innerHTML = "5";
+  else display.innerHTML += "5";
+});
+
+btn6.addEventListener("click", () => {
+  if (display.innerHTML === "0") display.innerHTML = "6";
+  else if (display.innerHTML === "eq") display.innerHTML = "6";
+  else display.innerHTML += "6";
+});
+
+btn7.addEventListener("click", () => {
+  if (display.innerHTML === "0") display.innerHTML = "7";
+  else if (display.innerHTML === "eq") display.innerHTML = "7";
+  else display.innerHTML += "7";
+});
+
+btn8.addEventListener("click", () => {
+  if (display.innerHTML === "0") display.innerHTML = "8";
+  else if (display.innerHTML === "eq") display.innerHTML = "8";
+  else display.innerHTML += "8";
+});
+
+btn9.addEventListener("click", () => {
+  if (display.innerHTML === "0") display.innerHTML = "9";
+  else if (display.innerHTML === "eq") display.innerHTML = "9";
+  else display.innerHTML += "9";
+});
+
+  
+    btnDot.addEventListener("click", () => {
+      display.innerHTML += ".";
+    });
+  
+    btnAdd.addEventListener("click", () => {
+      display.innerHTML += "+";
+    });
+  
+    btnSubtract.addEventListener("click", () => {
+      display.innerHTML += "-";
+    });
+  
+    btnMultiply.addEventListener("click", () => {
+      display.innerHTML += "*";
+    });
+  
+    btnDivide.addEventListener("click", () => {
+      display.innerHTML += "/";
+    });
+    btnEquals.addEventListener("click", () => {
+        let eq = eval(display.innerHTML)
+        display.innerHTML = eq
+        
+    })
+  </script>
+  

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 300px;
+        }
+
+        input[type="text"],
+        input[type="button"] {
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="button"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <input type="text" id="number" placeholder="Enter a number">
+        <input type="button" value="Check Prime" id="btncheck">
+        <input type="text" id="result">
+    </form>
+
+    <script>
+        let numberInput = document.querySelector("#number");
+        let btnCheck = document.querySelector("#btncheck");
+        let result = document.querySelector("#result");
+
+        btnCheck.addEventListener("click", () => {
+            let n = parseFloat(numberInput.value);
+            let p = 1;
+
+            if (n === 1) {
+                p = 2;
+            } else {
+                for (let i = 2; i <= n / 2; i++) {
+                    if (n % i === 0) {
+                        p = 0;
+                        break;
+                    }
+                }
+            }
+
+            if (p === 1) {
+                result.value = "Number is prime";
+            } else if (p === 0) {
+                result.value = "Number is not prime";
+            } else {
+                result.value = "Number is 1, does not work";
+            }
+        });
+    </script>
+</body>
+</html>

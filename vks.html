@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circular Environmental Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .dashboard {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            width: 90%;
+            max-width: 1400px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+        
+        .metrics-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+        
+        .metric-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            margin: 0 auto;
+        }
+        
+        .metric-circle:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .metric-title {
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            color: #34495e;
+        }
+        
+        .metric-value {
+            font-size: 32px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            color: #2c3e50;
+        }
+        
+        .metric-unit {
+            font-size: 14px;
+            margin-top: 4px;
+            color: #7f8c8d;
+            transition: all 0.3s ease;
+        }
+        
+        /* Temperature specific styling */
+        .temp-circle {
+            border: 10px solid rgba(231, 76, 60, 0.15);
+        }
+        
+        .temp-circle:hover {
+            border-color: rgba(231, 76, 60, 0.3);
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.03), rgba(231, 76, 60, 0.01));
+        }
+        
+        .temp-circle .metric-title {
+            color: #e74c3c;
+        }
+        
+        .temp-circle:hover .metric-value {
+            color: #e74c3c;
+            transform: scale(1.1);
+        }
+        
+        /* Humidity specific styling */
+        .hum-circle {
+            border: 10px solid rgba(52, 152, 219, 0.15);
+        }
+        
+        .hum-circle:hover {
+            border-color: rgba(52, 152, 219, 0.3);
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.03), rgba(52, 152, 219, 0.01));
+        }
+        
+        .hum-circle .metric-title {
+            color: #3498db;
+        }
+        
+        .hum-circle:hover .metric-value {
+            color: #3498db;
+            transform: scale(1.1);
+        }
+        
+        /* Pressure specific styling */
+        .press-circle {
+            border: 10px solid rgba(46, 204, 113, 0.15);
+        }
+        
+        .press-circle:hover {
+            border-color: rgba(46, 204, 113, 0.3);
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.03), rgba(46, 204, 113, 0.01));
+        }
+        
+        .press-circle .metric-title {
+            color: #2ecc71;
+        }
+        
+        .press-circle:hover .metric-value {
+            color: #2ecc71;
+            transform: scale(1.1);
+        }
+        
+        /* Air Quality specific styling */
+        .air-circle {
+            border: 10px solid rgba(155, 89, 182, 0.15);
+        }
+        
+        .air-circle:hover {
+            border-color: rgba(155, 89, 182, 1);
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.03), rgba(155, 89, 182, 0.01));
+        }
+        
+        .air-circle .metric-title {
+            color: #9b59b6;
+        }
+        
+        .air-circle:hover .metric-value {
+            color: #9b59b6;
+            transform: scale(1.1);
+        }
+        
+        /* Altitude specific styling */
+        .alt-circle {
+            border: 10px solid rgba(241, 196, 15, 0.15);
+        }
+        
+        .alt-circle:hover {
+            border-color: rgba(241, 196, 15, 0.3);
+            background: linear-gradient(135deg, rgba(241, 196, 15, 0.03), rgba(241, 196, 15, 0.01));
+        }
+        
+        .alt-circle .metric-title {
+            color: #f1c40f;
+        }
+        
+        .alt-circle:hover .metric-value {
+            color: #f1c40f;
+            transform: scale(1.1);
+        }
+        
+        /* Current indicator */
+        .current-indicator {
+            position: absolute;
+            bottom: 25px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #95a5a6;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.4s ease 0.1s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .metric-circle:hover .current-indicator {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Inner circle effect */
+        .metric-circle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+        }
+        
+        .metric-circle:hover::before {
+            width: 180px;
+            height: 180px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .metrics-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .metrics-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .metrics-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .metric-circle {
+                width: 160px;
+                height: 160px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>Environmental Dashboard</h1>
+            <p>Real-time monitoring of environmental conditions</p>
+        </div>
+        
+        <div class="metrics-container">
+            <!-- Temperature Circle -->
+            <div class="metric-circle temp-circle">
+                <div class="metric-title">Temperature</div>
+                <div class="metric-value" id="temp">--</div>
+                <div class="metric-unit">°C</div>
+                <div class="current-indicator">Current</div>
+            </div>
+            
+            <!-- Humidity Circle -->
+            <div class="metric-circle hum-circle">
+                <div class="metric-title">Humidity</div>
+                <div class="metric-value" id="humidity">--</div>
+                <div class="metric-unit">%</div>
+                <div class="current-indicator">Current</div>
+            </div>
+            
+            <!-- Pressure Circle -->
+            <div class="metric-circle press-circle">
+                <div class="metric-title">Pressure</div>
+                <div class="metric-value" id="pressure">--</div>
+                <div class="metric-unit">hPa</div>
+                <div class="current-indicator">Current</div>
+            </div>
+            
+            <!-- Altitude Circle -->
+            <div class="metric-circle alt-circle">
+                <div class="metric-title">Altitude</div>
+                <div class="metric-value" id="altitude">--</div>
+                <div class="metric-unit">meters</div>
+                <div class="current-indicator">Current</div>
+            </div>
+            
+            <!-- Air Quality Circle -->
+            <div class="metric-circle air-circle">
+                <div class="metric-title">Air Quality</div>
+                <div class="metric-value" id="air_quality">--</div>
+                <div class="metric-unit">PPM</div>
+                <div class="current-indicator">Current</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateAllData() {
+            fetch('/data')
+                .then(response => response.json())
+                .then(data => {
+                    // Update all circular metrics
+                    document.getElementById('temp').textContent = data.temperature.toFixed(1);
+                    document.getElementById('humidity').textContent = data.humidity.toFixed(1);
+                    document.getElementById('pressure').textContent = data.pressure.toFixed(0);
+                    document.getElementById('altitude').textContent = data.altitude.toFixed(1);
+                    document.getElementById('air_quality').textContent = data.air_quality.toFixed(0);
+                    
+                    setTimeout(updateAllData, 2000);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    setTimeout(updateAllData, 5000);
+                });
+        }
+        
+        document.addEventListener('DOMContentLoaded', updateAllData);
+    </script>
+</body>
+</html>

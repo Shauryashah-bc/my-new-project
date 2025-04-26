@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 300px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="button"] {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <input type="text" id="height">
+        <input type="text" id="length">
+        <input type="button" id="btnans" value="Click me"/>
+        <input type="text" id="area">
+    </form>
+</body>
+<script>
+    let height = document.querySelector("#height");
+    let length = document.querySelector("#length");
+    let btnans =  document.querySelector("#btnans");
+    let area = document.querySelector("#area");
+
+
+    btnans.addEventListener("click", () => {
+        let h = parseFloat(height.value);
+        let l = parseFloat(length.value);
+        area.value = l*h*0.5;
+
+    });
+
+
+</script>

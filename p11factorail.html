@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;  
+            flex-direction: column;
+            gap: 15px;
+            width: 300px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="button"] {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <input type="text" id="txtno">
+        <input type="button" id="btnans" value="Click me"/>
+        <input type="text" id="factorial">
+    </form>
+</body>
+<script>
+    let n = document.querySelector("#txtno");
+    
+    let factorial = document.querySelector("#factorial");
+    
+    btnans.addEventListener("click",() => {
+        let num = parseInt(n.value);
+        let f = 1;
+        for (i=1; i<num+1; i++){
+        f = f * i;
+        };
+        factorial.value = f;
+    });
+
+    
+</script>
+</html>
